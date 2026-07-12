@@ -45,6 +45,12 @@
 SourceArt/**/*.png
 SourceArt/**/*.tga
 
+#JetBrains Rider
+.idea/
+
+#visual studi solution format
+*.slnx
+
 # Binary Files
 Binaries/*
 Plugins/**/Binaries/*
