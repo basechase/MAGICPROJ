@@ -175,10 +175,10 @@ void AMagicProjectCharacter::DoJumpEnd()
 
 void AMagicProjectCharacter::DoClick(const FInputActionValue& Value)
 {
-	UE_LOG(LogTemp, Warning, TEXT("FIREBALL ABILITY ACTIVATED"));
+	
 	if (AbilitySystemComponent)
 	{
-		AbilitySystemComponent->TryActivateAbilityByClass(UMyGameplayAbility::StaticClass());
+		AbilitySystemComponent->TryActivateAbilityByClass(FireAbilityClass);
 		
 	}
 }

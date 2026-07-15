@@ -37,6 +37,7 @@ protected:
 
 	/** Jump Input Action */
 	
+	
 	UPROPERTY(EditAnywhere, Category="Input")
 	UInputAction* LeftAction;
 
@@ -76,6 +77,11 @@ protected:
 
 public:
 
+	
+	UPROPERTY(EditDefaultsOnly, Category="Abilities")
+	TSubclassOf<UGameplayAbility> FireAbilityClass;
+	
+	
 	/* Ability System Getter */
 	UAbilitySystemComponent* GetAbilitySystemComponent() const  { return AbilitySystemComponent; }
 	

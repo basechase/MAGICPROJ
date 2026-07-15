@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Abilities/GameplayAbility.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 #include "MyGameplayAbility.generated.h"
 
 /**
@@ -14,11 +15,26 @@ class MAGICPROJECT_API UMyGameplayAbility : public UGameplayAbility
 {
 	GENERATED_BODY()
 	
-public:	
+	
+	
+	
+public:
+	
+	
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile")
+	TSubclassOf<class AActor> BulletActor;
+	
+	
+protected:
+	
 	virtual void ActivateAbility(const FGameplayAbilitySpecHandle Handle, 
 								const FGameplayAbilityActorInfo* Info, 
 								const FGameplayAbilityActivationInfo ActivationInfo, 
 								const FGameplayEventData* TriggerEventData) 
 								override;
+	
+	
+	
 	
 };

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerState.h"
+#include "Abilities/GameplayAbility.h"
 #include "AbilitySystemInterface.h"
 #include "MyPlayerState.generated.h"
 
@@ -17,12 +18,13 @@ class MAGICPROJECT_API AMyPlayerState : public APlayerState, public IAbilitySyst
 	
 	
 public:
-	
+	void BeginPlay();
 	
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
 	
-	
+	UPROPERTY(EditDefaultsOnly, Category = "Abilites")
+	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
 	UAbilitySystemComponent* AbilitySystemComponent;
