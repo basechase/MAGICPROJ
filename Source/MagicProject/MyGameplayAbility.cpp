@@ -24,7 +24,7 @@ void UMyGameplayAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle
 	if (Character)
 	{
 		DrawDebugSphere(Character->GetWorld(), Character->GetActorLocation(), 16, 16, FColor::Green, false, 3.0f);
-		GetWorld()->SpawnActor<AActor>(BulletActor, Character->GetActorLocation()+ Character->GetActorForwardVector()* 200, Character->GetActorRotation());
+		GetWorld()->SpawnActor<AActor>(BulletActor, Character->GetActorLocation()+ Character->GetActorForwardVector()* 100, Character->GetActorRotation());
 	}
 	
 	
