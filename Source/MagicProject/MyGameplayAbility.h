@@ -20,7 +20,7 @@ class MAGICPROJECT_API UMyGameplayAbility : public UGameplayAbility
 	
 public:
 	
-	FVector ActorOffSet;
+	
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile")
 	TSubclassOf<class AActor> BulletActor;
