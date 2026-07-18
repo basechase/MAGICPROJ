@@ -17,14 +17,19 @@ UMyGameplayAbility::UMyGameplayAbility()
 void UMyGameplayAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* Info,
                                          const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData)
 {
+	APlayerController* PC = Cast<APlayerController>(GetActorInfo().PlayerController.Get());
+	float Pitch = PC->PlayerCameraManager->GetCameraRotation().Pitch;
+	FRotator CameraRotation = PC->PlayerCameraManager->GetCameraRotation();
 	ACharacter* Character = Cast<ACharacter>(Info->AvatarActor.Get());
+	
 	Super::ActivateAbility(Handle, Info, ActivationInfo, TriggerEventData);
 	UE_LOG(LogTemp, Warning, TEXT("FIRE ABILITY ACTIVATED"));
 	
 	if (Character)
 	{
 		DrawDebugSphere(Character->GetWorld(), Character->GetActorLocation(), 16, 16, FColor::Green, false, 3.0f);
-		GetWorld()->SpawnActor<AActor>(BulletActor, Character->GetActorLocation()+ Character->GetActorForwardVector()* 200, Character->GetActorRotation());
+		
+		GetWorld()->SpawnActor<AActor>(BulletActor, Character->GetActorLocation()+ Character->GetActorForwardVector()* 200, CameraRotation);
 	}
 	
 	
