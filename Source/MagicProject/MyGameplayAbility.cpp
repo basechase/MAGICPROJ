@@ -18,8 +18,8 @@ void UMyGameplayAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle
                                          const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData)
 {
 	APlayerController* PC = Cast<APlayerController>(GetActorInfo().PlayerController.Get());
-	float Pitch = PC->PlayerCameraManager->GetCameraRotation().Pitch;
 	FRotator CameraRotation = PC->PlayerCameraManager->GetCameraRotation();
+	float Pitch = PC->PlayerCameraManager->GetCameraRotation().Pitch;
 	ACharacter* Character = Cast<ACharacter>(Info->AvatarActor.Get());
 	
 	Super::ActivateAbility(Handle, Info, ActivationInfo, TriggerEventData);
@@ -29,7 +29,7 @@ void UMyGameplayAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle
 	{
 		DrawDebugSphere(Character->GetWorld(), Character->GetActorLocation(), 16, 16, FColor::Green, false, 3.0f);
 		
-		GetWorld()->SpawnActor<AActor>(BulletActor, Character->GetActorLocation()+ Character->GetActorForwardVector()* 200, CameraRotation);
+		GetWorld()->SpawnActor<AActor>(BulletActor, Character->GetActorLocation()+ Character->GetActorForwardVector()* 200, FRotator (Pitch, Character->GetActorRotation().Yaw,0.f));
 	}
 	
 	
