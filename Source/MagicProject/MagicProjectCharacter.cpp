@@ -14,6 +14,7 @@
 #include "InputActionValue.h"
 #include "MagicProject.h"
 #include "MyGameplayAbility.h"
+#include "Engine/World.h"
 #include "Kismet/GameplayStatics.h"
 
 AMagicProjectCharacter::AMagicProjectCharacter()
@@ -76,8 +77,16 @@ void AMagicProjectCharacter::SetupPlayerInputComponent(UInputComponent* PlayerIn
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AMagicProjectCharacter::Look);
+		//leftclick
 		
 		EnhancedInputComponent->BindAction(LeftAction, ETriggerEvent::Started, this, &AMagicProjectCharacter::DoClick);
+		
+		//rightclick
+		EnhancedInputComponent->BindAction(RightAction, ETriggerEvent::Started, this, &AMagicProjectCharacter::DoAim);
+		
+		EnhancedInputComponent->BindAction(RightAction, ETriggerEvent::Completed, this, &AMagicProjectCharacter::DoRelease);
+
+	
 	}
 	else
 	{
@@ -173,6 +182,12 @@ void AMagicProjectCharacter::DoJumpEnd()
 	StopJumping();
 }
 
+void AMagicProjectCharacter::DoAim(const FInputActionValue& Value)
+{
+	CameraBoom->TargetArmLength = 150.f;
+}
+
+
 void AMagicProjectCharacter::DoClick(const FInputActionValue& Value)
 {
 	
@@ -181,4 +196,9 @@ void AMagicProjectCharacter::DoClick(const FInputActionValue& Value)
 		AbilitySystemComponent->TryActivateAbilityByClass(FireAbilityClass);
 		
 	}
+}
+
+void AMagicProjectCharacter::DoRelease(const FInputActionValue& Value)
+{
+	CameraBoom->TargetArmLength = 400.f;
 }

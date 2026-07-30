@@ -37,10 +37,13 @@ protected:
 
 	/** Jump Input Action */
 	
-	
+	//left click
 	UPROPERTY(EditAnywhere, Category="Input")
 	UInputAction* LeftAction;
 
+	//right click
+	UPROPERTY(EditAnywhere, Category="Input")
+	UInputAction* RightAction;
 	
 	UPROPERTY(EditAnywhere, Category="Input")
 	UInputAction* JumpAction;
@@ -56,6 +59,10 @@ protected:
 	/** Mouse Look Input Action */
 	UPROPERTY(EditAnywhere, Category="Input")
 	UInputAction* MouseLookAction;
+	
+	
+	
+	
 
 public:
 	
@@ -109,8 +116,13 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Input")
 	virtual void DoJumpEnd();
 	
+	UFUNCTION(BlueprintCallable, Category="Input")
+	virtual void DoAim(const FInputActionValue& Value);
 	
+	UFUNCTION(BlueprintCallable, Category="Input")
 	void DoClick(const FInputActionValue& Value);
+	
+	virtual void DoRelease(const FInputActionValue& Value);
 	
 
 public:
