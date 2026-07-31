@@ -37,6 +37,10 @@ protected:
 
 	/** Jump Input Action */
 	
+	//shoulder swapping lik arc raiders :)
+	UPROPERTY(EditAnywhere,Category="Input")
+	UInputAction* SwapAction;
+	
 	//left click
 	UPROPERTY(EditAnywhere, Category="Input")
 	UInputAction* LeftAction;
@@ -59,8 +63,6 @@ protected:
 	/** Mouse Look Input Action */
 	UPROPERTY(EditAnywhere, Category="Input")
 	UInputAction* MouseLookAction;
-	
-	
 	
 	
 
@@ -125,6 +127,9 @@ public:
 	
 	virtual void DoRelease(const FInputActionValue& Value);
 	
+	UFUNCTION(BlueprintCallable, Category="Input")
+	void DoShoulderSwap(const FInputActionValue& Value);
+	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	float CameraLerpSpeed =  0.5f;
 	
@@ -136,6 +141,9 @@ public:
 	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	bool bIsAiming = false;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	bool bRightShoulder = true;
 	
 	
 public:

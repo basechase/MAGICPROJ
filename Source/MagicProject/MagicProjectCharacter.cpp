@@ -86,6 +86,8 @@ void AMagicProjectCharacter::SetupPlayerInputComponent(UInputComponent* PlayerIn
 		
 		EnhancedInputComponent->BindAction(RightAction, ETriggerEvent::Completed, this, &AMagicProjectCharacter::DoRelease);
 
+		EnhancedInputComponent->BindAction(SwapAction, ETriggerEvent::Triggered, this, &AMagicProjectCharacter::DoShoulderSwap);
+		
 	
 	}
 	else
@@ -212,7 +214,7 @@ void AMagicProjectCharacter::DoAim(const FInputActionValue& Value)
 {
 	bIsAiming = true;
 	
-	CameraBoom->TargetArmLength = 200.f;
+	CameraBoom->TargetArmLength = 250.f;
 }
 
 
@@ -221,3 +223,9 @@ void AMagicProjectCharacter::DoRelease(const FInputActionValue& Value)
 	bIsAiming = false;
 	CameraBoom->TargetArmLength = 400.f;
 }
+
+void AMagicProjectCharacter::DoShoulderSwap(const FInputActionValue& Value)
+{
+	AimCameraOffset.Y *= -1.f;
+}
+
