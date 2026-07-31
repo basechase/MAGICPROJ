@@ -84,6 +84,7 @@ protected:
 
 public:
 
+	virtual void Tick(float DeltaTime) override;
 	
 	UPROPERTY(EditDefaultsOnly, Category="Abilities")
 	TSubclassOf<UGameplayAbility> FireAbilityClass;
@@ -124,7 +125,19 @@ public:
 	
 	virtual void DoRelease(const FInputActionValue& Value);
 	
-
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	float CameraLerpSpeed =  0.5f;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	FVector DefaultCameraOffset =FVector(0.0f, 0.0f, 0.0f);
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	FVector AimCameraOffset = FVector(50,60,20);
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	bool bIsAiming = false;
+	
+	
 public:
 
 	/** Returns CameraBoom subobject **/

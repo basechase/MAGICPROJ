@@ -112,6 +112,20 @@ void AMagicProjectCharacter::Look(const FInputActionValue& Value)
 	DoLook(LookAxisVector.X, LookAxisVector.Y);
 }
 
+void AMagicProjectCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	
+	FVector TargetOffSet = bIsAiming ? AimCameraOffset : DefaultCameraOffset;
+		
+	CameraBoom->SocketOffset = FMath::VInterpTo(
+		CameraBoom->SocketOffset,
+		TargetOffSet,
+		DeltaTime,
+		CameraLerpSpeed);
+	
+}
+
 void AMagicProjectCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
@@ -182,10 +196,6 @@ void AMagicProjectCharacter::DoJumpEnd()
 	StopJumping();
 }
 
-void AMagicProjectCharacter::DoAim(const FInputActionValue& Value)
-{
-	CameraBoom->TargetArmLength = 150.f;
-}
 
 
 void AMagicProjectCharacter::DoClick(const FInputActionValue& Value)
@@ -198,7 +208,16 @@ void AMagicProjectCharacter::DoClick(const FInputActionValue& Value)
 	}
 }
 
+void AMagicProjectCharacter::DoAim(const FInputActionValue& Value)
+{
+	bIsAiming = true;
+	
+	CameraBoom->TargetArmLength = 200.f;
+}
+
+
 void AMagicProjectCharacter::DoRelease(const FInputActionValue& Value)
 {
+	bIsAiming = false;
 	CameraBoom->TargetArmLength = 400.f;
 }
