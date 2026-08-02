@@ -130,6 +130,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Input")
 	void DoShoulderSwap(const FInputActionValue& Value);
 	
+	virtual void BeginPlay() override;
+	
+	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	float CameraLerpSpeed =  0.5f;
 	

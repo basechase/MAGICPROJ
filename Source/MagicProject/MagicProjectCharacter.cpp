@@ -16,6 +16,7 @@
 #include "MyGameplayAbility.h"
 #include "Blueprint/UserWidget.h"
 #include "Engine/World.h"
+#include "Framework/Docking/TabManager.h"
 #include "Kismet/GameplayStatics.h"
 
 AMagicProjectCharacter::AMagicProjectCharacter()
@@ -129,6 +130,14 @@ void AMagicProjectCharacter::Tick(float DeltaTime)
 	
 }
 
+void AMagicProjectCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	
+	
+	
+}
+
 void AMagicProjectCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
@@ -139,6 +148,17 @@ void AMagicProjectCharacter::PossessedBy(AController* NewController)
 	{
 		AbilitySystemComponent = PS->GetAbilitySystemComponent();
 		AbilitySystemComponent->InitAbilityActorInfo(PS,this);
+	}
+	
+	if (CrosshairWidgetClass)
+	{
+		CrosshairWidget = CreateWidget<UUserWidget>(GetWorld(), CrosshairWidgetClass);
+	}
+	
+	if (CrosshairWidget)
+	{
+		CrosshairWidget->AddToViewport();
+		CrosshairWidget->SetVisibility(ESlateVisibility::Hidden);
 	}
 	
 }
@@ -217,14 +237,11 @@ void AMagicProjectCharacter::DoAim(const FInputActionValue& Value)
 	bIsAiming = true;
 	GetCharacterMovement()->bOrientRotationToMovement = false;
 	
-	if (CrosshairWidgetClass)
-	{
-		CrosshairWidget = CreateWidget<UUserWidget>(GetWorld(), CrosshairWidgetClass);
-	}
+	
 	
 	if (CrosshairWidget)
 	{
-		CrosshairWidget->AddToViewport();
+		CrosshairWidget->SetVisibility(ESlateVisibility::Visible);
 	}
 	
 }
@@ -238,8 +255,9 @@ void AMagicProjectCharacter::DoRelease(const FInputActionValue& Value)
 	
 	if (CrosshairWidget)
 	{
-		CrosshairWidget->RemoveFromParent();
-		CrosshairWidget = nullptr;
+		
+		CrosshairWidget->SetVisibility(ESlateVisibility::Hidden);
+		
 	}
 	
 	
