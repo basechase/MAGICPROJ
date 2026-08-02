@@ -146,6 +146,13 @@ public:
 	bool bRightShoulder = true;
 	
 	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> CrosshairWidgetClass;
+	
+	UPROPERTY()
+	UUserWidget* CrosshairWidget;
+	
+	
 public:
 
 	/** Returns CameraBoom subobject **/

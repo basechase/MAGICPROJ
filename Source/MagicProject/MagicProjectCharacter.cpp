@@ -14,6 +14,7 @@
 #include "InputActionValue.h"
 #include "MagicProject.h"
 #include "MyGameplayAbility.h"
+#include "Blueprint/UserWidget.h"
 #include "Engine/World.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -212,16 +213,36 @@ void AMagicProjectCharacter::DoClick(const FInputActionValue& Value)
 
 void AMagicProjectCharacter::DoAim(const FInputActionValue& Value)
 {
+	bUseControllerRotationYaw = true;
 	bIsAiming = true;
+	GetCharacterMovement()->bOrientRotationToMovement = false;
 	
-	CameraBoom->TargetArmLength = 250.f;
+	if (CrosshairWidgetClass)
+	{
+		CrosshairWidget = CreateWidget<UUserWidget>(GetWorld(), CrosshairWidgetClass);
+	}
+	
+	if (CrosshairWidget)
+	{
+		CrosshairWidget->AddToViewport();
+	}
+	
 }
 
 
 void AMagicProjectCharacter::DoRelease(const FInputActionValue& Value)
 {
+	bUseControllerRotationYaw = false;
 	bIsAiming = false;
-	CameraBoom->TargetArmLength = 400.f;
+	GetCharacterMovement()->bOrientRotationToMovement = true;
+	
+	if (CrosshairWidget)
+	{
+		CrosshairWidget->RemoveFromParent();
+		CrosshairWidget = nullptr;
+	}
+	
+	
 }
 
 void AMagicProjectCharacter::DoShoulderSwap(const FInputActionValue& Value)
