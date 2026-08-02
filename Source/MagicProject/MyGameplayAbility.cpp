@@ -38,12 +38,31 @@ void UMyGameplayAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle
 	if (Character)
 	{
 		
-		GetWorld()->LineTraceSingleByChannel(
+		bool bHit = GetWorld()->LineTraceSingleByChannel(
 			Hit,
 			StartingCamLocation,
 			EndLocation,
 			ECC_Visibility,
 			CollisionParams);
+		
+		
+		
+		
+		
+		if (bHit)
+		{
+			DrawDebugLine(
+	GetWorld(),
+StartingCamLocation,
+		Hit.Location,
+		FColor::Green,
+		false,
+10.0f,
+0,
+2.0f);
+		}
+		
+		
 		
 		DrawDebugLine(
 	GetWorld(),
