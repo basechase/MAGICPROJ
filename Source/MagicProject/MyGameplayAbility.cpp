@@ -45,10 +45,6 @@ void UMyGameplayAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle
 			ECC_Visibility,
 			CollisionParams);
 		
-		
-		
-		
-		
 		if (bHit)
 		{
 			DrawDebugLine(
@@ -59,20 +55,26 @@ StartingCamLocation,
 		false,
 10.0f,
 0,
-2.0f);
+1.0f);
+			
+			
+		DrawDebugLine(
+	GetWorld(),
+	Hit.Location,
+	EndLocation,
+	FColor::Red,
+	false,
+	10.0f,
+	0,
+	1.0f);
+		
 		}
 		
 		
 		
-		DrawDebugLine(
-	GetWorld(),
-	StartingCamLocation,
-	EndLocation,
-	FColor::Red,
-	false,
-	1.0f,
-	0,
-	2.0f);
+		
+		
+		
 		
 	}
 	
