@@ -66,7 +66,7 @@ StartingCamLocation,
 10.0f,
 0,
 1.0f);
-			
+			 
 			
 		DrawDebugLine(
 	GetWorld(),
@@ -85,7 +85,7 @@ StartingCamLocation,
 		GetWorld()->SpawnActor<AActor>(
 			BulletActor,
 			Character->GetActorLocation() + Character->GetActorForwardVector() * 200.f,
-			FRotator(SpawnRotation.Pitch, SpawnRotation.Yaw, 0.0f));
+			FRotator(SpawnRotation.Pitch, SpawnRotation.Yaw, SpawnRotation.Roll));
 		
 	}
 	

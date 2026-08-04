@@ -235,8 +235,11 @@ void AMagicProjectCharacter::DoAim(const FInputActionValue& Value)
 {
 	bUseControllerRotationYaw = true;
 	bIsAiming = true;
-	GetCharacterMovement()->bOrientRotationToMovement = false;
-	
+	/* makes character run sideways in ONLY one direction when aiming
+	 \
+	 GetCharacterMovement()->bOrientRotationToMovement = false;
+	\
+	*/
 	
 	
 	if (CrosshairWidget)

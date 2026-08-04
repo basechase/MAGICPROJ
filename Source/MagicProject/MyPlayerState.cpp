@@ -5,6 +5,15 @@
 #include "AbilitySystemComponent.h"
 #include "MyGameplayAbility.h"
 
+AMyPlayerState::AMyPlayerState()
+{
+	UE_LOG(LogTemp, Warning, TEXT("C++ Constructor Running"));
+	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(
+		TEXT("AbilitySystemComponent"));
+	
+}
+
+
 void AMyPlayerState::BeginPlay()
 {
 	Super::BeginPlay();
@@ -18,8 +27,6 @@ void AMyPlayerState::BeginPlay()
 		
 			UE_LOG(LogTemp, Warning, TEXT("Granted Ability: %s"), *Ability->GetName());
 		}
-	
-	
 }
 
 UAbilitySystemComponent* AMyPlayerState::GetAbilitySystemComponent() const
@@ -27,14 +34,3 @@ UAbilitySystemComponent* AMyPlayerState::GetAbilitySystemComponent() const
 	return AbilitySystemComponent;
 }
 
-AMyPlayerState::AMyPlayerState()
-{
-	UE_LOG(LogTemp, Warning, TEXT("C++ Constructor Running"));
-	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(
-		TEXT("AbilitySystemComponent"));
-	
-	
-	
-	
-	
-}
