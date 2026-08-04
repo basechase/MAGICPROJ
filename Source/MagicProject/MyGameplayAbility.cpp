@@ -23,12 +23,14 @@ void UMyGameplayAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle
 	float Pitch = PC->PlayerCameraManager->GetCameraRotation().Pitch;
 	ACharacter* Character = Cast<ACharacter>(Info->AvatarActor.Get());
 	
+	
 	FVector StartingCamLocation = PC->PlayerCameraManager->GetCameraLocation();
 	FVector EndLocation = StartingCamLocation + CameraRotation.Vector() * 100000.f;
 	
 	FCollisionQueryParams CollisionParams;
 	CollisionParams.AddIgnoredActor(Character);
 	FHitResult Hit;
+	
 	
 	
 	
@@ -44,9 +46,17 @@ void UMyGameplayAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle
 			EndLocation,
 			ECC_Visibility,
 			CollisionParams);
+			
+		FVector TargetLocation = Hit.bBlockingHit ? Hit.Location : EndLocation;
 		
 		if (bHit)
 		{
+			
+			
+			
+			
+			
+			
 			DrawDebugLine(
 	GetWorld(),
 StartingCamLocation,
@@ -69,12 +79,13 @@ StartingCamLocation,
 	1.0f);
 		
 		}
+		FVector Direction = (TargetLocation - Character->GetActorLocation()).GetSafeNormal();
+		FRotator SpawnRotation = Direction.Rotation();
 		
-		
-		
-		
-		
-		
+		GetWorld()->SpawnActor<AActor>(
+			BulletActor,
+			Character->GetActorLocation() + Character->GetActorForwardVector() * 200.f,
+			FRotator(SpawnRotation.Pitch, SpawnRotation.Yaw, 0.0f));
 		
 	}
 	
